@@ -1,0 +1,104 @@
+openapi: 3.0.1
+info:
+    title: NodeJS 后台体检系统
+    version: 1.0.0
+servers:
+    - url: /
+tags:
+    - name: doctor
+paths:
+    /doctor/getDoctorByCodeByPass:
+        post:
+            deprecated: false
+            operationId: doctorGetDoctorByCodeByPassPOST
+            parameters: []
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/DoctorLoginRequest'
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Result'
+                    description: 成功
+            security: []
+            summary: 医生登录
+            tags:
+                - doctor
+            x-apifox-folder: doctor
+            x-apifox-status: developing
+            x-run-in-apifox: https://apifox.com/web/project/3411896/apis/api-116533253-run
+            x-eov-operation-handler: controllers/DoctorController
+components:
+    schemas:
+        Result:
+            example:
+                isSucceed: true
+            properties:
+                isSucceed:
+                    description: 操作是否成功
+                    type: boolean
+            required:
+                - isSucceed
+            type: object
+            x-apifox-orders:
+                - isSucceed
+            x-apifox-ignore-properties: []
+            x-apifox-folder: response
+        DoctorLoginRequest:
+            example:
+                password: password
+                docCode: docCode
+            properties:
+                docCode:
+                    type: string
+                password:
+                    type: string
+            required:
+                - docCode
+                - password
+            type: object
+            x-apifox-orders:
+                - docCode
+                - password
+            x-apifox-ignore-properties: []
+            x-apifox-folder: request
+        Doctor:
+            properties:
+                docId:
+                    description: 唯一标识
+                    type: string
+                docCode:
+                    description: 医生编号（登录用）
+                    type: string
+                realName:
+                    type: string
+                password:
+                    type: string
+                sex:
+                    description: 1为男；0为女
+                    type: integer
+                deptno:
+                    description: 所属科室（1 为检验科；2为内科；3为外科）
+                    type: integer
+            required:
+                - deptno
+                - docCode
+                - docId
+                - password
+                - realName
+                - sex
+            type: object
+            x-apifox-orders:
+                - docId
+                - docCode
+                - realName
+                - password
+                - sex
+                - deptno
+            x-apifox-ignore-properties: []
+            x-apifox-folder: ''
+    securitySchemes: {}

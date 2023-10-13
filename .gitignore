@@ -1,0 +1,5 @@
+node_modules
+dist
+src/uploaded_files
+
+*.log
