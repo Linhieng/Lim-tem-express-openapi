@@ -89,7 +89,6 @@ export default class Controller {
 
     static collectRequestParams(request) {
         const requestParams = {}
-        debugger
         if (request.openapi.schema.requestBody !== undefined) {
             const { content } = request.openapi.schema.requestBody
             if (content['application/json'] !== undefined) {
@@ -97,7 +96,13 @@ export default class Controller {
                     request.openapi.schema.requestBody.content[
                         'application/json'
                     ]
-                // TODO: 这里本应该能够获取到 $ref，从而得到 api 中对应的对象名称。但不知为何这里并没有 $ref 参数
+                //
+                // 这里的代码是通过 OpenAPI Generator 生成的，在它的版本中 schema 身上似乎保留了 $ref，但在我的测试中，由于
+                // express-openapi-validator 库的处理（借助 json-schema-ref-parser），$ref 属性已经被替换成具体的引用对象值了
+                // 所以该 if 判断可能永远不会为 true
+                // 之所以没有删掉这行代码，是因为该行代码的目的是获取请求体数据的接口对象名，如果能够实现的话，那么编写代码时会更加清晰
+                // 在 services 中可以直接通过变量名知道数据是什么数据，而不是简单的一个 body
+                //
                 if (schema.$ref) {
                     requestParams[
                         schema.$ref.substr(schema.$ref.lastIndexOf('.'))
