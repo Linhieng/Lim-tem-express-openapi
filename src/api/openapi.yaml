@@ -15,14 +15,35 @@ paths:
             requestBody:
                 content:
                     application/json:
+                        example:
+                            doctorCode: '123'
+                            password: '1234'
                         schema:
                             $ref: '#/components/schemas/DoctorLoginRequest'
             responses:
                 '200':
                     content:
                         application/json:
+                            examples:
+                                '1':
+                                    summary: 成功示例
+                                    value:
+                                        isSucceed: true
+                                        doctor:
+                                            id: 1
+                                            realName: 石明
+                                            password: '1234'
+                                            doctorCode: '123'
+                                            gender: 1
+                                            createTime: 2023-10-13T04:56:07.000+00:00
+                                            updateTime: 2023-10-13T04:56:07.000+00:00
+                                            status: 1
+                                '2':
+                                    summary: 异常示例
+                                    value:
+                                        isSucceed: false
                             schema:
-                                $ref: '#/components/schemas/Result'
+                                $ref: '#/components/schemas/DoctorLoginResponse'
                     description: 成功
             security: []
             summary: 医生登录
@@ -34,71 +55,126 @@ paths:
             x-eov-operation-handler: controllers/DoctorController
 components:
     schemas:
-        Result:
+        DoctorInfo:
+            description: 医生信息表
+            properties:
+                id:
+                    description: 主键
+                    maximum: 2147483647
+                    minimum: 1
+                    readOnly: true
+                    type: integer
+                realName:
+                    description: 姓名
+                    maxLength: 10
+                    minLength: 2
+                    type: string
+                password:
+                    description: 密码
+                    maxLength: 16
+                    minLength: 4
+                    type: string
+                doctorCode:
+                    description: 医生编码（用于登录）
+                    maxLength: 10
+                    minLength: 3
+                    type: string
+                gender:
+                    description: 0女；1男；2保密
+                    enum:
+                        - 0
+                        - 1
+                        - 2
+                    maximum: 127
+                    minimum: -128
+                    type: integer
+                    x-apifox:
+                        enumDescriptions:
+                            '0': 女
+                            '1': 男
+                            '2': 保密
+                createTime:
+                    description: 记录创建时间
+                    format: date-time
+                    readOnly: true
+                    type: string
+                updateTime:
+                    description: 记录更新时间
+                    format: date-time
+                    readOnly: true
+                    type: string
+                status:
+                    description: 1代表记录有效；0代表记录无效（相当于删除）
+                    enum:
+                        - 0
+                        - 1
+                    maximum: 127
+                    minimum: -128
+                    readOnly: true
+                    type: integer
+                    x-apifox:
+                        enumDescriptions:
+                            '0': 已删除
+                            '1': 有效
+            required:
+                - createTime
+                - doctorCode
+                - gender
+                - id
+                - password
+                - realName
+                - status
+                - updateTime
+            type: object
+            x-apifox-orders:
+                - id
+                - realName
+                - password
+                - doctorCode
+                - gender
+                - createTime
+                - updateTime
+                - status
+            x-apifox-ignore-properties: []
+            x-apifox-folder: ''
+        DoctorLoginResponse:
             example:
                 isSucceed: true
             properties:
                 isSucceed:
                     description: 操作是否成功
                     type: boolean
+                doctor:
+                    anyOf:
+                        - $ref: '#/components/schemas/DoctorInfo'
             required:
                 - isSucceed
             type: object
             x-apifox-orders:
                 - isSucceed
+                - doctor
             x-apifox-ignore-properties: []
             x-apifox-folder: response
         DoctorLoginRequest:
             example:
                 password: password
-                docCode: docCode
+                doctorCode: doctorCode
             properties:
-                docCode:
+                doctorCode:
+                    maxLength: 10
+                    minLength: 2
                     type: string
                 password:
+                    maxLength: 16
+                    minLength: 4
                     type: string
             required:
-                - docCode
+                - doctorCode
                 - password
             type: object
             x-apifox-orders:
-                - docCode
+                - doctorCode
                 - password
             x-apifox-ignore-properties: []
             x-apifox-folder: request
-        Doctor:
-            properties:
-                docId:
-                    description: 唯一标识
-                    type: string
-                docCode:
-                    description: 医生编号（登录用）
-                    type: string
-                realName:
-                    type: string
-                password:
-                    type: string
-                sex:
-                    description: 1为男；0为女
-                    type: integer
-                deptno:
-                    description: 所属科室（1 为检验科；2为内科；3为外科）
-                    type: integer
-            required:
-                - deptno
-                - docCode
-                - docId
-                - password
-                - realName
-                - sex
-            type: object
-            x-apifox-orders:
-                - docId
-                - docCode
-                - realName
-                - password
-                - sex
-                - deptno
-            x-apifox-ignore-properties: []
-            x-apifox-folder: ''
     securitySchemes: {}

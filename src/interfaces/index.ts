@@ -1,8 +1,3 @@
-export interface DoctorLoginRequest {
-    docCode: string
-    password: string
-}
-
-export interface ResponseResult {
-    isSucceed: boolean
-}
+export * from './request'
+export * from './response'
+export * from './dbTable'

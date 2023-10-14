@@ -1,23 +1,26 @@
 /* eslint-disable no-unused-vars */
-import { DoctorLoginRequest, ResponseResult } from '../interfaces'
+import { DoctorLoginRequest, DoctorLoginResponse } from '../interfaces'
+import { searchByCodeAndPass } from '../models'
 import Service from './Service'
 
 /**
  * 医生登录
- *
- * doctorLoginRequest DoctorLoginRequest  (optional)
- * returns Result
- * */
+ */
 export const doctorGetDoctorByCodeByPassPOST = ({ body, doctorLoginRequest }) =>
     new Promise(async (resolve, reject) => {
         try {
             const data: DoctorLoginRequest = doctorLoginRequest || body
-            const response: ResponseResult = {
+            const response: DoctorLoginResponse = {
                 isSucceed: false,
             }
-            if (data.docCode === '123' && data.password === '123') {
+
+            const searchResult = await searchByCodeAndPass(data)
+
+            if (searchResult.length > 0) {
                 response.isSucceed = true
+                response.doctor = searchResult[0]
             }
+
             resolve(Service.successResponse(response))
         } catch (e) {
             reject(

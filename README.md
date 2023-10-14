@@ -3,7 +3,13 @@
 TODO:
 
 - [x] 借助 openapi 搭建基于 node 的 express 的后台模版
-- [ ] 对接数据库
+- [x] 对接数据库
+- [ ] 请求失败时，提供消息体；修改运行错误的返回格式
+
+待解决问题：
+
+- [ ] camelcase 是 ES 模块，ts将其处理为了 commonJS。考虑使用 rollup 代替
+- [ ] apifox 的 openapi 文档有点问题，需要自己再次处理一下
 
 ## 笔记
 
