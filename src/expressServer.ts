@@ -19,7 +19,7 @@ class ExpressServer {
     schema: JsonObject
     server: unknown // TODO: ?
 
-    constructor(port: number, openApiYaml: any) {
+    constructor(port: number, openApiYaml: string) {
         this.port = port
         this.app = express()
         this.openApiPath = openApiYaml
@@ -28,8 +28,12 @@ class ExpressServer {
                 fs.readFileSync(openApiYaml, 'utf8'),
             ) as JsonObject
         } catch (error) {
-            logger.error({ message: 'failed to start Express Server', error })
+            logger.error({
+                message: 'failed to convert openApiYaml to JsonSchema',
+                error,
+            })
         }
+
         this.setupMiddleware()
     }
 

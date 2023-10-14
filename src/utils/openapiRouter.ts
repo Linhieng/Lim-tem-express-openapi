@@ -2,8 +2,15 @@ import logger from '../logger'
 import * as controllers from '../controllers'
 import * as Services from '../services'
 
+//
+// 该文件目前不会被使用到
+//
+
 function handleError(err, request, response, next) {
-    logger.error(err)
+    logger.error({
+        message: 'openapi router error',
+        error: err,
+    })
     const code = err.code || 400
     response.status(code)
     response.error = err
