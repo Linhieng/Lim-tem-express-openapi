@@ -24,26 +24,8 @@ paths:
                 '200':
                     content:
                         application/json:
-                            examples:
-                                '1':
-                                    summary: 成功示例
-                                    value:
-                                        isSucceed: true
-                                        doctor:
-                                            id: 1
-                                            realName: 石明
-                                            password: '1234'
-                                            doctorCode: '123'
-                                            gender: 1
-                                            createTime: 2023-10-13T04:56:07.000+00:00
-                                            updateTime: 2023-10-13T04:56:07.000+00:00
-                                            status: 1
-                                '2':
-                                    summary: 异常示例
-                                    value:
-                                        isSucceed: false
                             schema:
-                                $ref: '#/components/schemas/DoctorLoginResponse'
+                                $ref: '#/components/schemas/ResponseGeneral'
                     description: 成功
             security: []
             summary: 医生登录
@@ -55,6 +37,25 @@ paths:
             x-eov-operation-handler: controllers/DoctorController
 components:
     schemas:
+        ResponseGeneral:
+            properties:
+                code:
+                    type: integer
+                message:
+                    type: string
+                data:
+                    type: string
+            required:
+                - code
+                - message
+            type: object
+            x-apifox-orders:
+                - code
+                - message
+                - data
+            x-apifox-ignore-properties: []
+            x-apifox-folder: response
+
         DoctorInfo:
             description: 医生信息表
             properties:
