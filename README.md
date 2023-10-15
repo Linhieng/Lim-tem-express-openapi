@@ -1,15 +1,17 @@
 # 练习-体检系统后台
 
+思考：虽然使用 openapi 开发，不需要自己写 app.get, app.post 的接口了，但总感觉不习惯。主要就是 express-openapi-validator 将一切都处理好了，但我对它的具体实现并不清楚，只知道一个大概。
+
 TODO:
 
 - [x] 借助 openapi 搭建基于 node 的 express 的后台模版
 - [x] 对接数据库
-- [ ] 请求失败时，提供消息体；修改运行错误的返回格式
+- [x] 请求失败时，提供消息体；修改运行错误的返回格式
 
 待解决问题：
 
 - [x] ~~camelcase 是 ES 模块，ts将其处理为了 commonJS。考虑使用 rollup 代替~~ 自己创建了一个 npm 包来解决此问题。
-- [ ] apifox 的 openapi 文档有点问题，需要自己再次处理一下
+- [x] apifox 的 openapi 文档有点问题，需要自己再次处理一下
 
 ## 笔记
 
