@@ -21,6 +21,7 @@
         "ts-node": "^10.9.1"
     },
     "dependencies": {
+        "@linhieng/camelcase": "^0.0.4",
         "body-parser": "^1.20.2",
         "camelcase": "^8.0.0",
         "cookie-parser": "^1.4.6",

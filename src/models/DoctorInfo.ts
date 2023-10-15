@@ -1,7 +1,7 @@
 import poll from '../db/connect'
 import { DoctorLoginRequest } from '../interfaces'
 import { DoctorInfo } from '../interfaces/dbTable'
-import { convertToCamelCase } from '../utils'
+import convertToCamelCase from '@linhieng/camelcase'
 
 export async function searchByCodeAndPass({
     doctorCode,

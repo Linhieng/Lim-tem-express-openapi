@@ -8,7 +8,7 @@ TODO:
 
 待解决问题：
 
-- [ ] camelcase 是 ES 模块，ts将其处理为了 commonJS。考虑使用 rollup 代替
+- [x] ~~camelcase 是 ES 模块，ts将其处理为了 commonJS。考虑使用 rollup 代替~~ 自己创建了一个 npm 包来解决此问题。
 - [ ] apifox 的 openapi 文档有点问题，需要自己再次处理一下
 
 ## 笔记
