@@ -4,8 +4,17 @@ import { DoctorInfo } from './dbTable'
  * 通用的响应体，所有响应体都继承自该接口
  */
 export interface ResponseGeneral {
+    /**
+     * 操作结果
+     */
     code: number
+    /**
+     * 操作结果消息
+     */
     message: string
+    /**
+     * 操作结果携带的数据
+     */
     data?: any
 }
 
@@ -20,10 +29,6 @@ export interface ResponseError extends ResponseGeneral {
 /**
  * 医生登录响应体
  */
-export interface DoctorLoginResponse {
-    doctor?: DoctorInfo
-    /**
-     * 操作是否成功
-     */
-    isSucceed: boolean
+export interface DoctorLoginResponse extends ResponseGeneral {
+    data: DoctorInfo
 }
