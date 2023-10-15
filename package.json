@@ -1,6 +1,6 @@
 {
-    "name": "physical-server",
-    "version": "bate-0.1",
+    "name": "template-express-openapi",
+    "version": "0.1",
     "scripts": {
         "dev": "set DEBUG=express:* & nodemon src/index.ts"
     },
