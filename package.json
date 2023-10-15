@@ -7,7 +7,9 @@
     "keywords": [
         "typescript",
         "express",
-        "openapi"
+        "openapi",
+        "mysql2",
+        "mysql"
     ],
     "author": "Linhieng",
     "license": "MIT",
